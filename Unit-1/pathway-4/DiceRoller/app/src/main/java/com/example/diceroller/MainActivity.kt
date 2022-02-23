@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 
 /**
  * Atividade que cria um número aleatório conforme
@@ -25,10 +24,11 @@ class MainActivity : AppCompatActivity() {
     private fun rollDice() {
         // Cria dado de 6 lados
         val dice = Dice(6)
-        val diceRoll = dice.roll()
         // Atualiza o texto da TextView
-        val resultTextView: TextView = findViewById(R.id.textView)
-        resultTextView.text = diceRoll.toString()
+        val resultTextView0: TextView = findViewById(R.id.dado1)
+        val resultTextView1: TextView = findViewById(R.id.dado2)
+        resultTextView0.text = dice.roll().toString()
+        resultTextView1.text = dice.roll().toString()
     }
 }
 
