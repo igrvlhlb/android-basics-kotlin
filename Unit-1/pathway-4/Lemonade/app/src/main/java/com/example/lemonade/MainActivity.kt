@@ -17,9 +17,12 @@ package com.example.lemonade
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import com.google.android.material.snackbar.Snackbar
+
+private const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
 
@@ -98,20 +101,24 @@ class MainActivity : AppCompatActivity() {
                 lemonSize = lemonTree.pick()
                 squeezeCount = 0
                 lemonadeState = SQUEEZE
+                Log.v(TAG,"Switched to SQUEEZE state.")
             }
             SQUEEZE -> {
                 squeezeCount += 1
                 lemonSize -= 1
                 if (lemonSize == 0) {
                     lemonadeState = DRINK
+                    Log.v(TAG,"Switched to DRINK state.")
                 }
             }
             DRINK -> {
-                lemonadeState = RESTART
                 lemonSize = -1
+                lemonadeState = RESTART
+                Log.v(TAG,"Switched to RESTART state.")
             }
             RESTART -> {
                 lemonadeState = SELECT
+                Log.v(TAG,"Switched to SELECT state.")
             }
         }
 
@@ -126,19 +133,19 @@ class MainActivity : AppCompatActivity() {
 
         when (lemonadeState) {
             SELECT -> {
-                textAction.setText("Click to select a lemon!")
+                textAction.setText(R.string.lemon_select)
                 lemonImage?.setImageResource(R.drawable.lemon_tree)
             }
             SQUEEZE -> {
-                textAction.setText("Click to juice the lemon!")
+                textAction.setText(R.string.lemon_squeeze)
                 lemonImage?.setImageResource(R.drawable.lemon_squeeze)
             }
             DRINK -> {
-                textAction.setText("Click to drink your lemonade!")
+                textAction.setText(R.string.lemon_drink)
                 lemonImage?.setImageResource(R.drawable.lemon_drink)
             }
             RESTART -> {
-                textAction.setText("Click to start again!")
+                textAction.setText(R.string.lemon_empty_glass)
                 lemonImage?.setImageResource(R.drawable.lemon_restart)
             }
         }
