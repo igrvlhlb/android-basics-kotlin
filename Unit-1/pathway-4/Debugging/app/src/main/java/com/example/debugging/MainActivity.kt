@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import kotlin.concurrent.thread
 
 private const val TAG = "MainActivity"
 
@@ -30,12 +31,15 @@ class MainActivity : AppCompatActivity() {
     fun division() {
         val numerator = 60
         var denominator = 4
-        repeat(4) {
-            // 3000 ms = 3s
-            Thread.sleep(3000)
-            findViewById<TextView>(R.id.division_textview).setText("${numerator / denominator}")
-            Log.v(TAG, "${numerator / denominator}")
-            denominator--
+        thread(start=true) {
+            repeat(4) {
+                // lambda que atualiza texto
+                runOnUiThread { findViewById<TextView>(R.id.division_textview).setText("${numerator / denominator}") }
+                // 3000 ms = 3s
+                Thread.sleep(3000)
+                Log.v(TAG, "${numerator / denominator}")
+                denominator--
+            }
         }
     }
 
