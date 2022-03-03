@@ -96,29 +96,31 @@ class MainActivity : AppCompatActivity() {
      */
     private fun clickLemonImage() {
 
+        val stateLog: (String) -> Unit = { state -> Log.v(TAG, "Switched to ${state} state.") }
+
         when (lemonadeState) {
             SELECT -> {
                 lemonSize = lemonTree.pick()
                 squeezeCount = 0
                 lemonadeState = SQUEEZE
-                Log.v(TAG,"Switched to SQUEEZE state.")
+                stateLog("SQUEEZE")
             }
             SQUEEZE -> {
                 squeezeCount += 1
                 lemonSize -= 1
                 if (lemonSize == 0) {
                     lemonadeState = DRINK
-                    Log.v(TAG,"Switched to DRINK state.")
+                    stateLog("DRINK")
                 }
             }
             DRINK -> {
                 lemonSize = -1
                 lemonadeState = RESTART
-                Log.v(TAG,"Switched to RESTART state.")
+                stateLog("RESTART")
             }
             RESTART -> {
                 lemonadeState = SELECT
-                Log.v(TAG,"Switched to SELECT state.")
+                stateLog("SELECT")
             }
         }
 
