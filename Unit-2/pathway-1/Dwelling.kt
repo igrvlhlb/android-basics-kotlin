@@ -4,20 +4,25 @@ fun main() {
     val squareCabin = SquareCabin(5, 5.0)
     val roundHut = RoundHut(3, 3.14)
     val roundTower = RoundTower(4, 3.0, 5)
-	val dwellings = listOf(squareCabin, roundHut, roundTower)
+    val dwellings = listOf(squareCabin, roundHut, roundTower)
     
-	dwellings.map({
-        instance -> with (instance) {
-            println("\n${className}\n============")
-            println("Capacity: ${capacity}")
-            println("Material: ${buildingMaterial}")
-            println("Has room? ${hasRoom()}")
-            println("Floor area: ${floorArea()}")
-            if (instance is RoundTower) {
-                println("Floors: ${instance.floors}")
+    while ( dwellings.map{ it.hasRoom() }.any{ it == true } ) {
+        dwellings.map({
+            instance -> with (instance) {
+                println("\n${className}\n============")
+                println("Capacity: ${capacity}")
+                println("Material: ${buildingMaterial}")
+                println("Has room? ${hasRoom()}")
+                getRoom()
+                println("Floor area: ${floorArea()}")
+                if (instance is RoundTower) {
+                    println("Floors: ${instance.floors}")
+                }
             }
-        }
-    })
+        })
+    }
+    
+	
 }
 
 
@@ -28,6 +33,15 @@ abstract class Dwelling(private var residents: Int) {
     
     fun hasRoom(): Boolean {
         return residents < capacity
+    }
+    
+    fun getRoom() {
+        if (capacity > residents) {
+            residents++
+            println("You got a room!")
+        } else {
+            println("Sorry, at capacity and no rooms left.")
+        }
     }
     
     abstract fun floorArea(): Double
