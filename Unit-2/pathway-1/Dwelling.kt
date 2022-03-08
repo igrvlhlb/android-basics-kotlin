@@ -1,10 +1,11 @@
 import kotlin.math.PI
+import kotlin.math.sqrt
 
 fun main() {
     val squareCabin = SquareCabin(5, 5.0)
     val roundHut = RoundHut(3, 3.14)
     val roundTower = RoundTower(4, 3.0, 5)
-    val dwellings = listOf(squareCabin, roundHut, roundTower)
+    var dwellings = listOf(squareCabin, roundHut, roundTower)
     
     while ( dwellings.map{ it.hasRoom() }.any{ it == true } ) {
         dwellings.map({
@@ -15,6 +16,9 @@ fun main() {
                 println("Has room? ${hasRoom()}")
                 getRoom()
                 println("Floor area: ${floorArea()}")
+                if (instance is RoundHut) {
+                    println("Carpet size: ${instance.calculateMaxCarpetSize()}")
+                }
                 if (instance is RoundTower) {
                     println("Floors: ${instance.floors}")
                 }
@@ -70,6 +74,12 @@ open class RoundHut(
     
     override fun floorArea(): Double {
         return PI * radius * radius
+    }
+    
+    fun calculateMaxCarpetSize(): Double {
+        // diameter * diameter = 4 * radius ^ 2
+        // (diameter * diameter) / 2 = 2 * radius ^ 2
+        return sqrt(2 * radius * radius)
     }
 }
 
