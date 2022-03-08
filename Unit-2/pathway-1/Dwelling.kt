@@ -1,7 +1,9 @@
+import kotlin.math.PI
+
 fun main() {
-    val squareCabin = SquareCabin(5)
-    val roundHut = RoundHut(3)
-    val roundTower = RoundTower(4, 6)
+    val squareCabin = SquareCabin(5, 5.0)
+    val roundHut = RoundHut(3, 3.14)
+    val roundTower = RoundTower(4, 3.0, 5)
 	val dwellings = listOf(squareCabin, roundHut, roundTower)
     
 	dwellings.map({
@@ -10,6 +12,7 @@ fun main() {
             println("Capacity: ${capacity}")
             println("Material: ${buildingMaterial}")
             println("Has room? ${hasRoom()}")
+            println("Floor area: ${floorArea()}")
             if (instance is RoundTower) {
                 println("Floors: ${instance.floors}")
             }
@@ -26,24 +29,46 @@ abstract class Dwelling(private var residents: Int) {
     fun hasRoom(): Boolean {
         return residents < capacity
     }
+    
+    abstract fun floorArea(): Double
 }
 
-class SquareCabin(residents: Int) : Dwelling(residents) {
+class SquareCabin(
+    residents: Int,
+	val length: Double) : Dwelling(residents) {
+    
 	override val className = "Square Cabin"
     override val buildingMaterial = "Wood"
     override val capacity = 6
+    
+    override fun floorArea(): Double {
+        return length * length
+    }
 }
 
-open class RoundHut(residents: Int) : Dwelling(residents) {
+open class RoundHut(
+    residents: Int,
+	val radius: Double) : Dwelling(residents) {
+    
     override val className = "Round Hut"
     override val buildingMaterial = "Straw"
     override val capacity = 4
+    
+    override fun floorArea(): Double {
+        return PI * radius * radius
+    }
 }
 
 class RoundTower(
     residents: Int,
-	val floors: Int = 2) : RoundHut(residents) {
+    radius: Double,
+	val floors: Int = 2) : RoundHut(residents, radius) {
+    
     override val className = "Round Tower"
     override val buildingMaterial = "Stone"
     override val capacity = 4 * floors
+    
+    override fun floorArea(): Double {
+        return super.floorArea() * floors
+    }
 }
