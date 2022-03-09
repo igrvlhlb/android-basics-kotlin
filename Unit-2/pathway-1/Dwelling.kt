@@ -17,19 +17,17 @@ fun main() {
     // while some of the dwelling has room, run the loop
     while ( dwellings.map{ it.hasRoom() }.any{ it == true } ) {
         dwellings.map {
-            with (it) {
-                println("\n${className}\n============")
-                println("Capacity: ${capacity}")
-                println("Material: ${buildingMaterial}")
-                println("Has room? ${hasRoom()}")
-                getRoom()
-                println("Floor area: ${floorArea()}")
-                if (it is RoundHut) {
-                    println("Carpet size: ${it.calculateMaxCarpetSize()}")
-                }
-                if (it is RoundTower) {
-                    println("Floors: ${it.floors}")
-                }
+            println("\n${it.className}\n============")
+            println("Capacity: ${it.capacity}")
+            println("Material: ${it.buildingMaterial}")
+            println("Has room? ${it.hasRoom()}")
+            it.getRoom()
+            println("Floor area: ${it.floorArea()}")
+            if (it is RoundHut) {
+                println("Carpet size: ${it.calculateMaxCarpetSize()}")
+            }
+            if (it is RoundTower) {
+                println("Floors: ${it.floors}")
             }
         }
     }
