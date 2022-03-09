@@ -8,22 +8,22 @@ fun main() {
     var dwellings = listOf(squareCabin, roundHut, roundTower)
     
     while ( dwellings.map{ it.hasRoom() }.any{ it == true } ) {
-        dwellings.map({
-            instance -> with (instance) {
+        dwellings.map {
+            with (it) {
                 println("\n${className}\n============")
                 println("Capacity: ${capacity}")
                 println("Material: ${buildingMaterial}")
                 println("Has room? ${hasRoom()}")
                 getRoom()
                 println("Floor area: ${floorArea()}")
-                if (instance is RoundHut) {
-                    println("Carpet size: ${instance.calculateMaxCarpetSize()}")
+                if (it is RoundHut) {
+                    println("Carpet size: ${it.calculateMaxCarpetSize()}")
                 }
-                if (instance is RoundTower) {
-                    println("Floors: ${instance.floors}")
+                if (it is RoundTower) {
+                    println("Floors: ${it.floors}")
                 }
             }
-        })
+        }
     }
     
 	
