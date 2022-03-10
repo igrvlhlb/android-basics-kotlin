@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+    
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vertical_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontal_text_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="24dp"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/margin_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="32dp"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/margin_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="32dp"/>
+
+    <TextView
+        android:id="@+id/convert_from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_convert_from"
+        android:textSize="@dimen/label_text_size"
+        app:layout_constraintStart_toStartOf="@id/margin_start"
+        app:layout_constraintEnd_toStartOf="@id/vertical_guideline"
+        app:layout_constraintTop_toTopOf="@id/horizontal_text_guideline"/>
+
+    <TextView
+        android:id="@+id/convert_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_convert_to"
+        android:textSize="@dimen/label_text_size"
+        app:layout_constraintStart_toEndOf="@id/vertical_guideline"
+        app:layout_constraintEnd_toStartOf="@id/margin_end"
+        app:layout_constraintTop_toTopOf="@id/horizontal_text_guideline"/>
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierMargin="8dp"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="convert_from,convert_to"/>
+
+    <EditText
+        android:id="@+id/edit_text_from"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintWidth_percent="0.2"
+        app:layout_constraintStart_toStartOf="@id/margin_start"
+        app:layout_constraintEnd_toStartOf="@id/convert_image"
+        app:layout_constraintTop_toBottomOf="@id/barrier"
+        android:inputType="numberDecimal"
+        android:hint="From"/>
+
+    <EditText
+        android:id="@+id/edit_text_to"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintWidth_percent=".2"
+        app:layout_constraintStart_toEndOf="@id/convert_image"
+        app:layout_constraintEnd_toEndOf="@id/margin_end"
+        app:layout_constraintTop_toBottomOf="@id/barrier"
+        android:inputType="numberDecimal"
+        android:hint="To"/>
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/edit_text_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:barrierMargin="8dp"
+        app:constraint_referenced_ids="edit_text_from,edit_text_to"/>
+
+    <ImageView
+        android:id="@+id/convert_image"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        app:layout_constraintEnd_toEndOf="@id/vertical_guideline"
+        app:layout_constraintStart_toStartOf="@id/vertical_guideline"
+        app:layout_constraintTop_toBottomOf="@id/barrier"
+        app:layout_constraintBottom_toTopOf="@id/edit_text_barrier"
+        tools:srcCompat="@drawable/ic_baseline_compare_arrows_24"
+        app:srcCompat="@drawable/ic_baseline_compare_arrows_24"/>
+
+    <RadioGroup
+        android:id="@+id/radio_group_from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/margin_start"
+        app:layout_constraintEnd_toStartOf="@id/vertical_guideline"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_barrier">
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/radio_group_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/vertical_guideline"
+        app:layout_constraintEnd_toStartOf="@id/margin_end"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_barrier">
+
+    </RadioGroup>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
