@@ -54,18 +54,20 @@ class UnitConverter(private val volume: Double, unit: Units = Units.CUP) {
     /**
      * Ratios of (cups / unit)
      */
-    private val cupsTspRatio = 1 / 48
-    private val cupsTbspRatio = 1 / 16
-    private val cupsFlOzRatio = 1 / 8
+    private val cupsTspRatio = 1.0 / 48.0
+    private val cupsTbspRatio = 1.0 / 16.0
+    private val cupsFlOzRatio = 1.0 / 8.0
 
     /* Converts the input volume to cups */
     init {
+        Log.d(TAG, "Volume: $volume")
         cups = when (unit) {
             Units.TSP -> tspToCups()
             Units.TBSP -> tbspToCups()
-            Units.FL_OZ -> tbspToCups()
+            Units.FL_OZ -> flOzToCups()
             Units.CUP -> volume
         }
+        Log.d(TAG, "Cups: $cups")
     }
 
     /**
