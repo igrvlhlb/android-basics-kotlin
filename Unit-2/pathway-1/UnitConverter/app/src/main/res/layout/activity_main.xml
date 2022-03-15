@@ -81,7 +81,7 @@
         app:layout_constraintStart_toEndOf="@id/convert_image"
         app:layout_constraintEnd_toEndOf="@id/margin_end"
         app:layout_constraintTop_toBottomOf="@id/barrier"
-        android:inputType="numberDecimal"
+        android:inputType="none"
         android:hint="0.00"/>
 
     <androidx.constraintlayout.widget.Barrier
