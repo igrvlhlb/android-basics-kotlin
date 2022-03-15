@@ -122,7 +122,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tablespoon"/>
-
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cup"/>
     </RadioGroup>
 
     <RadioGroup
@@ -144,6 +147,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tablespoon"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cup"/>
     </RadioGroup>
 
 
