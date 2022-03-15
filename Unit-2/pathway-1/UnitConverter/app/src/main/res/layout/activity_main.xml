@@ -111,18 +111,22 @@
         app:layout_constraintEnd_toStartOf="@id/vertical_guideline"
         app:layout_constraintTop_toBottomOf="@id/edit_text_barrier">
         <RadioButton
+            android:id="@+id/teaspoon_from"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/teaspoon"/>
         <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/fluid_ounces"/>
-        <RadioButton
+            android:id="@+id/tablespoon_from"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tablespoon"/>
         <RadioButton
+            android:id="@+id/fluid_ounces_from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fluid_ounces"/>
+        <RadioButton
+            android:id="@+id/cup_from"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/cup"/>
@@ -136,23 +140,43 @@
         app:layout_constraintEnd_toStartOf="@id/margin_end"
         app:layout_constraintTop_toBottomOf="@id/edit_text_barrier">
         <RadioButton
+            android:id="@+id/teaspoon_to"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/teaspoon"/>
         <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/fluid_ounces"/>
-        <RadioButton
+            android:id="@+id/tablespoon_to"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tablespoon"/>
         <RadioButton
+            android:id="@+id/fluid_ounces_to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fluid_ounces"/>
+        <RadioButton
+            android:id="@+id/cup_to"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/cup"/>
     </RadioGroup>
 
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/radio_group_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="radio_group_from,radio_group_to"
+        app:barrierMargin="8dp"/>
+
+    <Button
+        android:id="@+id/convert_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/vertical_guideline"
+        app:layout_constraintEnd_toEndOf="@id/vertical_guideline"
+        app:layout_constraintTop_toBottomOf="@id/radio_group_barrier"
+        android:text="@string/convert"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
