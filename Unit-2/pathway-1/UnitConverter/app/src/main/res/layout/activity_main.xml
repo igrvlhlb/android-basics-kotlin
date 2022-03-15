@@ -71,7 +71,7 @@
         app:layout_constraintEnd_toStartOf="@id/convert_image"
         app:layout_constraintTop_toBottomOf="@id/barrier"
         android:inputType="numberDecimal"
-        android:hint="From"/>
+        android:hint="0.00"/>
 
     <EditText
         android:id="@+id/edit_text_to"
@@ -82,7 +82,7 @@
         app:layout_constraintEnd_toEndOf="@id/margin_end"
         app:layout_constraintTop_toBottomOf="@id/barrier"
         android:inputType="numberDecimal"
-        android:hint="To"/>
+        android:hint="0.00"/>
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/edit_text_barrier"
@@ -110,6 +110,18 @@
         app:layout_constraintStart_toEndOf="@id/margin_start"
         app:layout_constraintEnd_toStartOf="@id/vertical_guideline"
         app:layout_constraintTop_toBottomOf="@id/edit_text_barrier">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/teaspoon"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fluid_ounces"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tablespoon"/>
 
     </RadioGroup>
 
@@ -120,7 +132,20 @@
         app:layout_constraintStart_toEndOf="@id/vertical_guideline"
         app:layout_constraintEnd_toStartOf="@id/margin_end"
         app:layout_constraintTop_toBottomOf="@id/edit_text_barrier">
-
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/teaspoon"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fluid_ounces"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tablespoon"/>
     </RadioGroup>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
