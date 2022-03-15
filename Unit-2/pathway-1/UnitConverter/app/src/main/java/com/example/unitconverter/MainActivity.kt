@@ -26,9 +26,9 @@ class MainActivity : AppCompatActivity() {
             binding.fluidOuncesFrom.id -> UnitConverter.Units.FL_OZ
             else -> return
         }
-        val volume = binding.editTextFrom.text.toString().toDoubleOrNull()
+        var volume = binding.editTextFrom.text.toString().toDoubleOrNull()
         if (volume == null) {
-            return
+            volume = 0.0
         }
         val converter = UnitConverter(volume, unitFrom)
         val convertedVolume = when (binding.radioGroupTo.checkedRadioButtonId) {
