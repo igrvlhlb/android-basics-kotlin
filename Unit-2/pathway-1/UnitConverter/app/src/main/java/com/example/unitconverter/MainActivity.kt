@@ -1,12 +1,44 @@
 package com.example.unitconverter
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import com.example.unitconverter.databinding.ActivityMainBinding
+
+const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        binding.convertButton.setOnClickListener { convertValue() }
+    }
+
+    fun convertValue() {
+        val unitFrom = when (binding.radioGroupFrom.checkedRadioButtonId) {
+            binding.cupFrom.id -> UnitConverter.Units.CUP
+            binding.teaspoonFrom.id -> UnitConverter.Units.TSP
+            binding.tablespoonFrom.id -> UnitConverter.Units.TBSP
+            binding.fluidOuncesFrom.id -> UnitConverter.Units.FL_OZ
+            else -> return
+        }
+        val volume = binding.editTextFrom.text.toString().toDoubleOrNull()
+        if (volume == null) {
+            return
+        }
+        val converter = UnitConverter(volume, unitFrom)
+        val convertedVolume = when (binding.radioGroupTo.checkedRadioButtonId) {
+            binding.cupTo.id -> converter.toCups()
+            binding.teaspoonTo.id -> converter.toTsp()
+            binding.tablespoonTo.id -> converter.toTbsp()
+            binding.fluidOuncesTo.id -> converter.toFlOz()
+            else -> return
+        }
+        binding.editTextTo.setText("%.3f".format(convertedVolume))
     }
 }
 
