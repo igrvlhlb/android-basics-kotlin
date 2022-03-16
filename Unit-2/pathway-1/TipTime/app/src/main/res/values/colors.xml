@@ -4,7 +4,24 @@
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_900">#FF004D40</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="orange_50">#FFFFF3E0</color>
+
+    <!-- My defined colors with names provided by https://www.color-name.com -->
+    <!-- primary -->
+    <color name="cinereous">#FFA1887F</color>
+    <!-- primary dark variant -->
+    <color name="cinerous_dark">#FF725B53</color>
+    <!-- primary light variant -->
+    <color name="cinerous_light">#FFD3B8AE</color>
+    <!-- secondary -->
+    <color name="apricot">#FFFFCCBC</color>
+    <!-- secondary dark variant -->
+    <color name="apricot_dark">#FFCB9B8C</color>
+    <!-- secondary light variant -->
+    <color name="apricot_light">#FFFFFFEE</color>
+
 </resources>
