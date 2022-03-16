@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Unit Converter</string>
+    <string name="text_convert_from">Convert From</string>
+    <string name="text_convert_to">To</string>
+    <string name="teaspoon">Teaspoon</string>
+    <string name="fluid_ounces">Fluid Ounces</string>
+    <string name="tablespoon">Tablespoon</string>
+    <string name="cup">Cup</string>
+    <string name="convert">Convert!</string>
+</resources>
