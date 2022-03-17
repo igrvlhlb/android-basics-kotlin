@@ -15,7 +15,7 @@
         app:layout_constraintBottom_toBottomOf="@id/cost_of_service"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/cost_of_service"
-        app:srcCompat="@drawable/ic_store" />
+        app:srcCompat="@drawable/ic_money" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/cost_of_service"
