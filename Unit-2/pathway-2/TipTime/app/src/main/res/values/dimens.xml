@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="main_margin_start">16dp</dimen>
+    <dimen name="main_margin_top">8dp</dimen>
+    <dimen name="main_text_width">160dp</dimen>
+    <dimen name="main_min_text_height">48dp</dimen>
+    <dimen name="main_padding">8dp</dimen>
+</resources>
