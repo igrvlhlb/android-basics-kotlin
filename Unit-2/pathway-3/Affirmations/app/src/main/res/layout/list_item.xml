@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/item_title"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:text="Texto exemplo" />
+    android:orientation="vertical">
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Texto exemplo" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="194dp"
+        android:id="@+id/item_image"
+        android:scaleType="centerCrop"
+        android:importantForAccessibility="no"
+        tools:srcCompat="@drawable/image1"/>
+
+</LinearLayout>
