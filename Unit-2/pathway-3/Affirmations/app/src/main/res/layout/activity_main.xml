@@ -12,5 +12,6 @@
         android:layout_height="match_parent"
         app:layoutManager="GridLayoutManager"
         app:spanCount="3"
+        tools:listitem="@layout/list_item"
         scrollbars="vertical" />
 </FrameLayout>
