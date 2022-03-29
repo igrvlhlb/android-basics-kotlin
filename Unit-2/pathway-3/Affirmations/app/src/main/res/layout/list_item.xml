@@ -18,7 +18,6 @@
             android:layout_height="0dp"
             android:importantForAccessibility="no"
             android:scaleType="centerCrop"
-            app:layout_constraintBottom_toTopOf="@id/item_title"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -33,6 +32,7 @@
             android:padding="16dp"
             android:textAppearance="?attr/textAppearanceCaption"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_image"
             app:layout_constraintStart_toStartOf="parent"
             tools:text="Texto exemplo" />
 
