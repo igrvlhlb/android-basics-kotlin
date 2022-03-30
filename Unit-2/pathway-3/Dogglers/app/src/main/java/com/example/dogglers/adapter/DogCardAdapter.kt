@@ -16,6 +16,7 @@
 package com.example.dogglers.adapter
 
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -23,6 +24,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dogglers.R
+import com.example.dogglers.const.Layout
 import com.example.dogglers.data.DataSource
 
 /**
@@ -47,15 +49,15 @@ class DogCardAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DogCardAdapter.DogCardViewHolder {
-        // TODO: Use a conditional to determine the layout type and set it accordingly.
-        //  if the layout variable is Layout.GRID the grid list item should be used. Otherwise the
-        //  the vertical/horizontal list item should be used.
+        val itemLayoutResource = when (viewType) {
+            Layout.GRID -> R.layout.grid_list_item
+            else -> R.layout.vertical_horizontal_list_item
+        }
+        val itemView = LayoutInflater
+            .from(parent.context)
+            .inflate(itemLayoutResource, parent, false)
 
-        // TODO Inflate the layout
-
-        // TODO: Null should not be passed into the view holder. This should be updated to reflect
-        //  the inflated layout.
-        return DogCardAdapter.DogCardViewHolder(null)
+        return DogCardAdapter.DogCardViewHolder(itemView)
     }
 
     override fun getItemCount(): Int = 0 // TODO: return the size of the data set instead of 0
