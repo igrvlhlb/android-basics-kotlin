@@ -50,7 +50,7 @@ class DogCardAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DogCardAdapter.DogCardViewHolder {
-        val itemLayoutResource = when (viewType) {
+        val itemLayoutResource = when (layout) {
             Layout.GRID -> R.layout.grid_list_item
             else -> R.layout.vertical_horizontal_list_item
         }
