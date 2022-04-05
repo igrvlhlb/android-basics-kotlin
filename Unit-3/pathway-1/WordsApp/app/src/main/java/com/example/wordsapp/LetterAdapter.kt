@@ -15,7 +15,9 @@
  */
 package com.example.wordsapp
 
+import android.content.Intent
 import android.os.Build
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +25,8 @@ import android.view.accessibility.AccessibilityNodeInfo
 import android.widget.Button
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
+
+private const val TAG = "LetterAdapter"
 
 /**
  * Adapter for the [RecyclerView] in [MainActivity].
@@ -52,7 +56,7 @@ class LetterAdapter :
                 .from(parent.context)
                 .inflate(R.layout.item_view, parent, false)
         // Setup custom accessibility delegate to set the text read
-        layout.accessibilityDelegate = Accessibility
+        layout.accessibilityDelegate = WordAdapter
         return LetterViewHolder(layout)
     }
 
@@ -62,6 +66,15 @@ class LetterAdapter :
     override fun onBindViewHolder(holder: LetterViewHolder, position: Int) {
         val item = list.get(position)
         holder.button.text = item.toString()
+        holder.button.setOnClickListener {
+            val context = holder.view.context
+            val intent = Intent(context, DetailActivity::class.java)
+            Log.d(TAG, "Button clicked!")
+            Log.d(TAG, "holder.button.text = ${holder.button.text}")
+            intent.putExtra("letter", holder.button.text.toString())
+            Log.d(TAG, "intent.getString(\"letter\") = ${intent.extras?.getString("letter")}")
+            context.startActivity(intent)
+        }
     }
 
     // Setup custom accessibility delegate to set the text read with
