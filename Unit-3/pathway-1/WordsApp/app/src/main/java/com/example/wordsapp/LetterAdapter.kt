@@ -71,8 +71,11 @@ class LetterAdapter :
             val intent = Intent(context, DetailActivity::class.java)
             Log.d(TAG, "Button clicked!")
             Log.d(TAG, "holder.button.text = ${holder.button.text}")
-            intent.putExtra("letter", holder.button.text.toString())
-            Log.d(TAG, "intent.getString(\"letter\") = ${intent.extras?.getString("letter")}")
+            intent.putExtra(DetailActivity.LETTER, holder.button.text.toString())
+            Log.d(
+                TAG,
+                "intent.getString(DetailActivity.LETTER) = ${intent.extras?.getString(DetailActivity.LETTER)}"
+            )
             context.startActivity(intent)
         }
     }

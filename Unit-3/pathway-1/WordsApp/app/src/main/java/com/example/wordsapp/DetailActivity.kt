@@ -26,6 +26,10 @@ private const val TAG = "DetailActivity"
 
 class DetailActivity : AppCompatActivity() {
 
+    companion object {
+        const val LETTER = "letter"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -38,7 +42,7 @@ class DetailActivity : AppCompatActivity() {
         // Retrieve the LETTER from the Intent extras
         // intent.extras.getString returns String? (String or null)
         // so toString() guarantees that the value will be a String
-        val letterId = intent?.extras?.getString("letter").toString()
+        val letterId = intent?.extras?.getString(LETTER).toString()
         Log.d(TAG, "letterId = $letterId")
 
         val recyclerView = binding.recyclerView
