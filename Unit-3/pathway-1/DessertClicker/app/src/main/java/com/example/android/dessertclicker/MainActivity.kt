@@ -116,7 +116,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.d(TAG, "onDestroy() Called")
+        Log.d(
+            TAG,
+            "onDestroy() Called" +
+                    "[isChangingConfigurations: ${isChangingConfigurations}; " +
+                    "isFinishing: ${isFinishing}]"
+        )
     }
 
     override fun onPause() {
