@@ -88,7 +88,14 @@ class GameFragment : Fragment() {
      * Skips the current word without changing the score.
      * Increases the word count.
      */
-    private fun onSkipWord() { }
+    private fun onSkipWord() {
+        if (viewModel.nextWord()) {
+            setErrorTextField(false)
+            updateNextWordOnScreen()
+        } else {
+            showFinalScoreDialog()
+        }
+    }
 
     /*
      * Gets a random word for the list of words and shuffles the letters in it.
