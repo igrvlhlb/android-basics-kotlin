@@ -56,10 +56,6 @@ class GameFragment : Fragment() {
          * a expressão lambda está fora dos parênteses por ser o último argumento
          * da função. Ver https://kotlinlang.org/docs/lambdas.html#passing-trailing-lambdas
          */
-        viewModel.currentScrambledWord.observe(viewLifecycleOwner)
-            { newWord ->
-                binding.textViewUnscrambledWord.text = newWord
-            }
         return binding.root
     }
 
@@ -73,15 +69,6 @@ class GameFragment : Fragment() {
         // Setup a click listener for the Submit and Skip buttons.
         binding.submit.setOnClickListener { onSubmitWord() }
         binding.skip.setOnClickListener { onSkipWord() }
-        viewModel.score.observe(viewLifecycleOwner)
-        { newScore ->
-            binding.score.text = getString(R.string.score, newScore)
-        }
-        viewModel.currentWordCount.observe(viewLifecycleOwner)
-        { newWordCount ->
-            binding.wordCount.text =
-                getString(R.string.word_count, newWordCount, MAX_NO_OF_WORDS)
-        }
     }
 
     /*
