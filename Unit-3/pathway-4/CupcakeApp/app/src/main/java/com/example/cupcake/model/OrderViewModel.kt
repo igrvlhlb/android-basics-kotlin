@@ -28,7 +28,13 @@ class OrderViewModel : ViewModel() {
     val dateOptions = getPickupOptions()
 
     init {
+        Log.d("MainActivity", "Init block called")
         resetOrder()
+    }
+
+    fun setQuantity(numberCupcakes: Int) {
+        _quantity.value = numberCupcakes
+        updatePrice()
     }
 
     private fun getFlavorQuantity(desiredFlavor: Any): Int {
@@ -68,6 +74,7 @@ class OrderViewModel : ViewModel() {
     }
 
     fun resetOrder() {
+        Log.d("MainActivity", "resetOrder() called")
         _quantity.value = 0
         _date.value = dateOptions[0]
         _price.value = 0.0
