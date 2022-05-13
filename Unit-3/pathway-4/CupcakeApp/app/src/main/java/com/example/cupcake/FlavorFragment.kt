@@ -81,8 +81,17 @@ class FlavorFragment : Fragment() {
         binding = null
     }
 
-    fun incFlavor(desiredFlavor: String) =  sharedViewModel.incFlavor(desiredFlavor)
-    fun decFlavor(desiredFlavor: String) =  sharedViewModel.decFlavor(desiredFlavor)
+    fun incFlavor(desiredFlavor: String) {
+        val result = sharedViewModel.incFlavor(desiredFlavor)
+        if (!result) {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.no_cupcakes_left, sharedViewModel.quantity.value),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+    fun decFlavor(desiredFlavor: String) = sharedViewModel.decFlavor(desiredFlavor)
 
     fun cancelOrder() {
         sharedViewModel.resetOrder()
