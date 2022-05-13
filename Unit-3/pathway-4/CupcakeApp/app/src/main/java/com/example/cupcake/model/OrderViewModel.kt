@@ -50,10 +50,14 @@ class OrderViewModel : ViewModel() {
     }
 
     fun decFlavor(desiredFlavor: Any) {
-        if (_currentQuantity == 0) return
         val oldQuantity = getFlavorQuantity(desiredFlavor)
-        Log.d("MainActivity", "Decremented from $oldQuantity to ${oldQuantity - 1}")
-        (_quantityByFlavor[desiredFlavor] as MutableLiveData<String>)?.value = (oldQuantity - 1).toString()
+
+        if ((_currentQuantity == 0) || (oldQuantity == 0)) return
+
+        val newQuantity = oldQuantity - 1
+
+        Log.d("MainActivity", "Decremented from $oldQuantity to ${newQuantity}")
+        (_quantityByFlavor[desiredFlavor] as MutableLiveData<String>)?.value = (newQuantity).toString()
         _currentQuantity -= 1
     }
 
