@@ -42,24 +42,28 @@ class OrderViewModel : ViewModel() {
         return _quantityByFlavor[desiredFlavor]?.value?.toInt() ?: 0
     }
 
-    fun incFlavor(desiredFlavor: String) {
-        if (_currentQuantity == quantity.value) return
+    fun incFlavor(desiredFlavor: String): Boolean {
         val oldQuantity = getFlavorQuantity(desiredFlavor)
-        Log.d("MainActivity", "Incremented from $oldQuantity to ${oldQuantity + 1}")
-        (_quantityByFlavor[desiredFlavor] as MutableLiveData<String>).value = (oldQuantity + 1).toString()
+        val newQuantity = oldQuantity + 1
+
+        if (_currentQuantity == quantity.value) return false
+
+        (_quantityByFlavor[desiredFlavor] as MutableLiveData<String>).value = (newQuantity).toString()
         _currentQuantity += 1
+        Log.d("MainActivity", "Incremented from $oldQuantity to $newQuantity")
+        return true
     }
 
-    fun decFlavor(desiredFlavor: String) {
+    fun decFlavor(desiredFlavor: String): Boolean {
         val oldQuantity = getFlavorQuantity(desiredFlavor)
-
-        if ((_currentQuantity == 0) || (oldQuantity == 0)) return
-
         val newQuantity = oldQuantity - 1
 
-        Log.d("MainActivity", "Decremented from $oldQuantity to ${newQuantity}")
+        if ((_currentQuantity == 0) || (oldQuantity == 0)) return false
+
         (_quantityByFlavor[desiredFlavor] as MutableLiveData<String>).value = (newQuantity).toString()
         _currentQuantity -= 1
+        Log.d("MainActivity", "Decremented from $oldQuantity to ${newQuantity}")
+        return true
     }
 
     fun setDate(pickupDate: String) {
@@ -109,7 +113,7 @@ class OrderViewModel : ViewModel() {
                 created_now = true
             }
             val ret = super.get(key)
-            Log.d("MainActivity", "AutoGenMap.get($key) returned ${ret?.value} [Created: $created_now]")
+            Log.v("MainActivity", "AutoGenMap.get($key) returned ${ret?.value} [Created: $created_now]")
             return super.get(key)
         }
     }
