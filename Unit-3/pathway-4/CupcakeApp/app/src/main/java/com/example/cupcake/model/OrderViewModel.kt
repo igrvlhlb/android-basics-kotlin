@@ -102,9 +102,13 @@ class OrderViewModel : ViewModel() {
      */
     class AutoGenMap(_map: MutableMap<Any,LiveData<String>>): LinkedHashMap<Any,LiveData<String>>(_map) {
         override fun get(key: Any): LiveData<String>? {
+            var created_now = false
             if (!this.containsKey(key)) {
                 this.set(key, MutableLiveData("0"))
+                created_now = true
             }
+            val ret = super.get(key)
+            Log.d("MainActivity", "AutoGenMap.get($key) returned ${ret?.value} [Created: $created_now]")
             return super.get(key)
         }
     }
