@@ -60,7 +60,16 @@ class FlavorFragment : Fragment() {
      * Navigate to the next screen to choose pickup date.
      */
     fun goToNextScreen() {
-        findNavController().navigate(R.id.action_flavorFragment_to_pickupFragment)
+        val remainingCupcakes = sharedViewModel.let { it.quantity.value!! - it.currentQuantity }
+        if (remainingCupcakes != 0) {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.cupcakes_remaining, remainingCupcakes),
+                Toast.LENGTH_SHORT
+            ).show()
+        } else {
+            findNavController().navigate(R.id.action_flavorFragment_to_pickupFragment)
+        }
     }
 
     /**

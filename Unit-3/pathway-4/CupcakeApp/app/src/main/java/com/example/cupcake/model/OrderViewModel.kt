@@ -16,6 +16,7 @@ class OrderViewModel : ViewModel() {
     private val _quantity = MutableLiveData<Int>()
     val quantity: LiveData<Int> get() = _quantity
     private var _currentQuantity = 0
+    val currentQuantity get() = _currentQuantity
     private var _quantityByFlavor = AutoGenMap(mutableMapOf())
     val quantityByFlavor: Map<Any, LiveData<String>> get() = _quantityByFlavor
     private val _date = MutableLiveData<String>()
@@ -45,7 +46,7 @@ class OrderViewModel : ViewModel() {
         if (_currentQuantity == quantity.value) return
         val oldQuantity = getFlavorQuantity(desiredFlavor)
         Log.d("MainActivity", "Incremented from $oldQuantity to ${oldQuantity + 1}")
-        (_quantityByFlavor[desiredFlavor] as MutableLiveData<String>)?.value = (oldQuantity + 1).toString()
+        (_quantityByFlavor[desiredFlavor] as MutableLiveData<String>).value = (oldQuantity + 1).toString()
         _currentQuantity += 1
     }
 
@@ -57,7 +58,7 @@ class OrderViewModel : ViewModel() {
         val newQuantity = oldQuantity - 1
 
         Log.d("MainActivity", "Decremented from $oldQuantity to ${newQuantity}")
-        (_quantityByFlavor[desiredFlavor] as MutableLiveData<String>)?.value = (newQuantity).toString()
+        (_quantityByFlavor[desiredFlavor] as MutableLiveData<String>).value = (newQuantity).toString()
         _currentQuantity -= 1
     }
 
