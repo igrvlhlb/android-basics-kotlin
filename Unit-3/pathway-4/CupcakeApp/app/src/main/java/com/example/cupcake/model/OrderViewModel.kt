@@ -18,7 +18,7 @@ class OrderViewModel : ViewModel() {
     private var _currentQuantity = 0
     val currentQuantity get() = _currentQuantity
     private var _quantityByFlavor = AutoGenMap(mutableMapOf())
-    val quantityByFlavor: Map<Any, LiveData<String>> get() = _quantityByFlavor
+    val quantityByFlavor: Map<String, LiveData<String>> get() = _quantityByFlavor
     private val _date = MutableLiveData<String>()
     val date: LiveData<String> get() = _date
     private val _price = MutableLiveData<Double>()
@@ -38,11 +38,11 @@ class OrderViewModel : ViewModel() {
         updatePrice()
     }
 
-    private fun getFlavorQuantity(desiredFlavor: Any): Int {
+    private fun getFlavorQuantity(desiredFlavor: String): Int {
         return _quantityByFlavor[desiredFlavor]?.value?.toInt() ?: 0
     }
 
-    fun incFlavor(desiredFlavor: Any) {
+    fun incFlavor(desiredFlavor: String) {
         if (_currentQuantity == quantity.value) return
         val oldQuantity = getFlavorQuantity(desiredFlavor)
         Log.d("MainActivity", "Incremented from $oldQuantity to ${oldQuantity + 1}")
@@ -50,7 +50,7 @@ class OrderViewModel : ViewModel() {
         _currentQuantity += 1
     }
 
-    fun decFlavor(desiredFlavor: Any) {
+    fun decFlavor(desiredFlavor: String) {
         val oldQuantity = getFlavorQuantity(desiredFlavor)
 
         if ((_currentQuantity == 0) || (oldQuantity == 0)) return
@@ -101,8 +101,8 @@ class OrderViewModel : ViewModel() {
      * não estão presentes.
      * Isso faz com que todas as instâncias de objetos retornados por padrão permanecam no Map
      */
-    class AutoGenMap(_map: MutableMap<Any,LiveData<String>>): LinkedHashMap<Any,LiveData<String>>(_map) {
-        override fun get(key: Any): LiveData<String>? {
+    class AutoGenMap(_map: MutableMap<String,LiveData<String>>): LinkedHashMap<String,LiveData<String>>(_map) {
+        override fun get(key: String): LiveData<String>? {
             var created_now = false
             if (!this.containsKey(key)) {
                 this.set(key, MutableLiveData("0"))
