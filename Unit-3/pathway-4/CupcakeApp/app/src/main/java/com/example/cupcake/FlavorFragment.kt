@@ -81,6 +81,9 @@ class FlavorFragment : Fragment() {
         binding = null
     }
 
+    fun incFlavor(desiredFlavor: String) =  sharedViewModel.incFlavor(desiredFlavor)
+    fun decFlavor(desiredFlavor: String) =  sharedViewModel.decFlavor(desiredFlavor)
+
     fun cancelOrder() {
         sharedViewModel.resetOrder()
         findNavController().navigate(R.id.action_flavorFragment_to_startFragment2)
