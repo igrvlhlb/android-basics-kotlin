@@ -25,6 +25,7 @@ class OrderViewModel : ViewModel() {
     val price: LiveData<String> = Transformations.map(_price) {
         NumberFormat.getCurrencyInstance().format(it)
     }
+    val flavorsString get() = _quantityByFlavor.summarizeFlavors()
 
     val dateOptions = getPickupOptions()
 
@@ -115,6 +116,15 @@ class OrderViewModel : ViewModel() {
             val ret = super.get(key)
             Log.v("MainActivity", "AutoGenMap.get($key) returned ${ret?.value} [Created: $created_now]")
             return super.get(key)
+        }
+
+        fun summarizeFlavors(): String {
+            val lineSeparator = System.getProperty("line.separator")
+            val summarizedString =
+                this.keys.sorted()
+                    .filter { (this.get(it)?.value?.toInt() ?: 0) > 0}
+                    .map { "$it: ${this.get(it)?.value}" }.joinToString(lineSeparator)
+            return summarizedString
         }
     }
 }
