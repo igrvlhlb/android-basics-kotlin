@@ -38,54 +38,240 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/side_margin">
 
-            <RadioGroup
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/flavor_options"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <RadioButton
+                <TextView
                     android:id="@+id/vanilla"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="@{viewModel.flavor.equals(@string/vanilla)}"
-                    android:onClick="@{() -> viewModel.setFlavor(@string/vanilla)}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/vanilla_counter"
+                    app:layout_constraintBottom_toBottomOf="@id/vanilla_counter"
                     android:text="@string/vanilla" />
 
-                <RadioButton
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/vanilla_minus_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:onClick="@{(v) -> flavorFragment.decFlavor(@string/vanilla)}"
+                    android:layout_marginRight="@dimen/margin_between_elements"
+                    app:layout_constraintTop_toTopOf="@id/vanilla_counter"
+                    app:layout_constraintBottom_toBottomOf="@id/vanilla_counter"
+                    app:layout_constraintEnd_toStartOf="@id/vanilla_counter"
+                    android:text="-" />
+
+                <EditText
+                    android:id="@+id/vanilla_counter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.quantityByFlavor[@string/vanilla]}"
+                    android:layout_marginRight="@dimen/margin_between_elements"
+                    android:enabled="false"
+                    app:layout_constraintTop_toTopOf="@id/vanilla_plus_button"
+                    app:layout_constraintBottom_toBottomOf="@id/vanilla_plus_button"
+                    app:layout_constraintEnd_toStartOf="@id/vanilla_plus_button"
+                    tools:text="11" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/vanilla_plus_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:onClick="@{() -> flavorFragment.incFlavor(@string/vanilla)}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="+" />
+
+                <TextView
                     android:id="@+id/chocolate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="@{viewModel.flavor.equals(@string/chocolate)}"
-                    android:onClick="@{() -> viewModel.setFlavor(@string/chocolate)}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/chocolate_counter"
+                    app:layout_constraintBottom_toBottomOf="@id/chocolate_counter"
                     android:text="@string/chocolate" />
 
-                <RadioButton
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/chocolate_minus_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:onClick="@{() -> flavorFragment.decFlavor(@string/chocolate)}"
+                    android:layout_marginRight="@dimen/margin_between_elements"
+                    app:layout_constraintTop_toTopOf="@id/chocolate_counter"
+                    app:layout_constraintBottom_toBottomOf="@id/chocolate_counter"
+                    app:layout_constraintEnd_toStartOf="@id/chocolate_counter"
+                    android:text="-" />
+
+                <EditText
+                    android:id="@+id/chocolate_counter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.quantityByFlavor[@string/chocolate]}"
+                    android:layout_marginRight="@dimen/margin_between_elements"
+                    android:enabled="false"
+                    app:layout_constraintTop_toTopOf="@id/chocolate_plus_button"
+                    app:layout_constraintBottom_toBottomOf="@id/chocolate_plus_button"
+                    app:layout_constraintEnd_toStartOf="@id/chocolate_plus_button"
+                    tools:text="11" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/chocolate_plus_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:onClick="@{() -> flavorFragment.incFlavor(@string/chocolate)}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/vanilla_plus_button"
+                    android:text="+" />
+
+                <TextView
                     android:id="@+id/red_velvet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="@{viewModel.flavor.equals(@string/red_velvet)}"
-                    android:onClick="@{() -> viewModel.setFlavor(@string/red_velvet)}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/red_velvet_counter"
+                    app:layout_constraintBottom_toBottomOf="@id/red_velvet_counter"
                     android:text="@string/red_velvet" />
 
-                <RadioButton
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/red_velvet_minus_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:onClick="@{() -> flavorFragment.decFlavor(@string/red_velvet)}"
+                    android:layout_marginRight="@dimen/margin_between_elements"
+                    app:layout_constraintTop_toTopOf="@id/red_velvet_counter"
+                    app:layout_constraintBottom_toBottomOf="@id/red_velvet_counter"
+                    app:layout_constraintEnd_toStartOf="@id/red_velvet_counter"
+                    android:text="-" />
+
+                <EditText
+                    android:id="@+id/red_velvet_counter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.quantityByFlavor[@string/red_velvet]}"
+                    android:layout_marginRight="@dimen/margin_between_elements"
+                    android:enabled="false"
+                    app:layout_constraintTop_toTopOf="@id/red_velvet_plus_button"
+                    app:layout_constraintBottom_toBottomOf="@id/red_velvet_plus_button"
+                    app:layout_constraintEnd_toStartOf="@id/red_velvet_plus_button"
+                    tools:text="11" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/red_velvet_plus_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:onClick="@{() -> flavorFragment.incFlavor(@string/red_velvet)}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/chocolate_plus_button"
+                    android:text="+" />
+
+                <TextView
                     android:id="@+id/salted_caramel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="@{viewModel.flavor.equals(@string/salted_caramel)}"
-                    android:onClick="@{() -> viewModel.setFlavor(@string/salted_caramel)}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/salted_caramel_counter"
+                    app:layout_constraintBottom_toBottomOf="@id/salted_caramel_counter"
                     android:text="@string/salted_caramel" />
 
-                <RadioButton
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/salted_caramel_minus_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:onClick="@{() -> flavorFragment.decFlavor(@string/salted_caramel)}"
+                    android:layout_marginRight="@dimen/margin_between_elements"
+                    app:layout_constraintTop_toTopOf="@id/salted_caramel_counter"
+                    app:layout_constraintBottom_toBottomOf="@id/salted_caramel_counter"
+                    app:layout_constraintEnd_toStartOf="@id/salted_caramel_counter"
+                    android:text="-" />
+
+                <EditText
+                    android:id="@+id/salted_caramel_counter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.quantityByFlavor[@string/salted_caramel]}"
+                    android:layout_marginRight="@dimen/margin_between_elements"
+                    android:enabled="false"
+                    app:layout_constraintTop_toTopOf="@id/salted_caramel_plus_button"
+                    app:layout_constraintBottom_toBottomOf="@id/salted_caramel_plus_button"
+                    app:layout_constraintEnd_toStartOf="@id/salted_caramel_plus_button"
+                    tools:text="11" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/salted_caramel_plus_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:onClick="@{() -> flavorFragment.incFlavor(@string/salted_caramel)}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/red_velvet_plus_button"
+                    android:text="+" />
+
+                <TextView
                     android:id="@+id/coffee"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="@{viewModel.flavor.equals(@string/coffee)}"
-                    android:onClick="@{() -> viewModel.setFlavor(@string/coffee)}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/coffee_counter"
+                    app:layout_constraintBottom_toBottomOf="@id/coffee_counter"
                     android:text="@string/coffee" />
-            </RadioGroup>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/coffee_minus_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:onClick="@{() -> flavorFragment.decFlavor(@string/coffee)}"
+                    android:layout_marginRight="@dimen/margin_between_elements"
+                    app:layout_constraintTop_toTopOf="@id/coffee_counter"
+                    app:layout_constraintBottom_toBottomOf="@id/coffee_counter"
+                    app:layout_constraintEnd_toStartOf="@id/coffee_counter"
+                    android:text="-" />
+
+                <EditText
+                    android:id="@+id/coffee_counter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.quantityByFlavor[@string/coffee]}"
+                    android:layout_marginRight="@dimen/margin_between_elements"
+                    android:enabled="false"
+                    app:layout_constraintTop_toTopOf="@id/coffee_plus_button"
+                    app:layout_constraintBottom_toBottomOf="@id/coffee_plus_button"
+                    app:layout_constraintEnd_toStartOf="@id/coffee_plus_button"
+                    tools:text="11" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/coffee_plus_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:onClick="@{() -> flavorFragment.incFlavor(@string/coffee)}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/salted_caramel_plus_button"
+                    android:text="+" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
                 android:id="@+id/divider"

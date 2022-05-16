@@ -60,7 +60,16 @@ class FlavorFragment : Fragment() {
      * Navigate to the next screen to choose pickup date.
      */
     fun goToNextScreen() {
-        findNavController().navigate(R.id.action_flavorFragment_to_pickupFragment)
+        val remainingCupcakes = sharedViewModel.let { it.quantity.value!! - it.currentQuantity }
+        if (remainingCupcakes != 0) {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.cupcakes_remaining, remainingCupcakes),
+                Toast.LENGTH_SHORT
+            ).show()
+        } else {
+            findNavController().navigate(R.id.action_flavorFragment_to_pickupFragment)
+        }
     }
 
     /**
@@ -71,6 +80,18 @@ class FlavorFragment : Fragment() {
         super.onDestroyView()
         binding = null
     }
+
+    fun incFlavor(desiredFlavor: String) {
+        val result = sharedViewModel.incFlavor(desiredFlavor)
+        if (!result) {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.no_cupcakes_left, sharedViewModel.quantity.value),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+    fun decFlavor(desiredFlavor: String) = sharedViewModel.decFlavor(desiredFlavor)
 
     fun cancelOrder() {
         sharedViewModel.resetOrder()
