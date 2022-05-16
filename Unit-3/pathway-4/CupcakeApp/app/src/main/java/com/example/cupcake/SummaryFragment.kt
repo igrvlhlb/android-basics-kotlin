@@ -62,12 +62,23 @@ class SummaryFragment : Fragment() {
      * Submit the order by sharing out the order details to another app via an implicit intent.
      */
     fun sendOrder() {
-        /**
+        if (binding?.nameEditText?.text.toString() == "") {
+            binding?.nameLayout?.error = getString(R.string.name_error)
+            Toast.makeText(context, R.string.no_name_provided, Toast.LENGTH_SHORT)
+            return
+        } else {
+            binding?.nameLayout?.error = null
+        }
+        val formattedFlavors =
+            StringBuilder(
+                sharedViewModel.flavorsString.replace("\n", "\n - "))
+                .insert(0, "\n - ")
+                .toString()
         val numberOfCupcakes = sharedViewModel.quantity.value ?: 0
         val orderSummary = getString(
             R.string.order_details,
             resources.getQuantityString(R.plurals.cupcakes, numberOfCupcakes, numberOfCupcakes),
-            sharedViewModel.flavor.value.toString(),
+            formattedFlavors,
             sharedViewModel.date.value.toString(),
             sharedViewModel.price.value.toString()
         )
@@ -78,7 +89,6 @@ class SummaryFragment : Fragment() {
         if (activity?.packageManager?.resolveActivity(intent, 0) != null) {
             startActivity(intent)
         }
-        */
     }
 
     /**
