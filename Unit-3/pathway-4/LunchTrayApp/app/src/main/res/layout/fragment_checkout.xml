@@ -141,7 +141,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/total"/>
 
-            <!-- TODO: cancel the order when clicked -->
+            <!-- cancel the order when clicked -->
             <Button
                 android:id="@+id/cancel_button"
                 style="?attr/materialButtonOutlinedStyle"
@@ -149,6 +149,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/base_margin"
                 android:text="@string/cancel"
+                android:onClick="@{() -> checkoutFragment.cancelOrder()}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/submit_button"/>
