@@ -18,11 +18,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/startOrderFragment">
+    app:startDestination="@id/startOrder">
 
 
     <fragment
-        android:id="@+id/startOrderFragment"
+        android:id="@+id/startOrder"
         android:name="com.example.lunchtray.ui.order.StartOrderFragment"
         android:label="fragment_start_order"
         tools:layout="@layout/fragment_start_order" >
@@ -40,8 +40,8 @@
             app:destination="@id/sideMenuFragment" />
         <action
             android:id="@+id/action_entreeMenuFragment_to_startOrderFragment"
-            app:destination="@id/startOrderFragment"
-            app:popUpTo="@id/startOrderFragment"
+            app:destination="@id/startOrder"
+            app:popUpTo="@id/startOrder"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
@@ -54,8 +54,8 @@
             app:destination="@id/checkoutFragment" />
         <action
             android:id="@+id/action_accompanimentMenuFragment_to_startOrderFragment"
-            app:destination="@id/startOrderFragment"
-            app:popUpTo="@id/startOrderFragment"
+            app:destination="@id/startOrder"
+            app:popUpTo="@id/startOrder"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
@@ -68,8 +68,8 @@
             app:destination="@id/accompanimentMenuFragment" />
         <action
             android:id="@+id/action_sideMenuFragment_to_startOrderFragment"
-            app:destination="@id/startOrderFragment"
-            app:popUpTo="@id/startOrderFragment"
+            app:destination="@id/startOrder"
+            app:popUpTo="@id/startOrder"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
@@ -79,8 +79,8 @@
         tools:layout="@layout/fragment_checkout" >
         <action
             android:id="@+id/action_checkoutFragment_to_startOrderFragment"
-            app:destination="@id/startOrderFragment"
-            app:popUpTo="@id/startOrderFragment"
+            app:destination="@id/startOrder"
+            app:popUpTo="@id/startOrder"
             app:popUpToInclusive="true" />
     </fragment>
 </navigation>
