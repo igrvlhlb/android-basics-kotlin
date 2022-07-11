@@ -17,12 +17,17 @@ package com.example.inventory
 
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.inventory.data.Item
 import com.example.inventory.databinding.FragmentAddItemBinding
 
 /**
@@ -31,6 +36,12 @@ import com.example.inventory.databinding.FragmentAddItemBinding
 class AddItemFragment : Fragment() {
 
     private val navigationArgs: ItemDetailFragmentArgs by navArgs()
+    private val viewModel: InventoryViewModel by activityViewModels {
+        InventoryViewModelFactory(
+            (activity?.application as InventoryApplication).database.itemDao()
+        )
+    }
+    lateinit var item: Item
 
     // Binding object instance corresponding to the fragment_add_item.xml layout
     // This property is non-null between the onCreateView() and onDestroyView() lifecycle callbacks,
@@ -47,6 +58,21 @@ class AddItemFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.saveAction.setOnClickListener {
+            val success = addNewItem()
+            if (!success) {
+                Log.d("aaa", "ERRO!!!")
+                Toast.makeText(
+                    context,
+                    "All fields must be non-empty",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+    }
+
     /**
      * Called before fragment is destroyed.
      */
@@ -57,5 +83,29 @@ class AddItemFragment : Fragment() {
                 InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(requireActivity().currentFocus?.windowToken, 0)
         _binding = null
+    }
+
+    private fun isEntryValid(): Boolean {
+        return viewModel.isEntryValid(
+            binding.itemName.text.toString(),
+            binding.itemPrice.text.toString(),
+            binding.itemCount.text.toString()
+        )
+    }
+
+    private fun addNewItem(): Boolean {
+        if (isEntryValid()) {
+            viewModel.addNewItem(
+            binding.itemName.text.toString(),
+            binding.itemPrice.text.toString(),
+            binding.itemCount.text.toString()
+            )
+            val action = AddItemFragmentDirections.actionAddItemFragmentToItemListFragment()
+            findNavController().navigate(action)
+            // nunca executado ?
+            return true
+        } else {
+            return false
+        }
     }
 }
