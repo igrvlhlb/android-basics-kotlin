@@ -22,6 +22,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -60,15 +61,23 @@ class AddItemFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.saveAction.setOnClickListener {
-            val success = addNewItem()
-            if (!success) {
-                Log.d("aaa", "ERRO!!!")
-                Toast.makeText(
-                    context,
-                    "All fields must be non-empty",
-                    Toast.LENGTH_SHORT
-                ).show()
+        val id = navigationArgs.itemId
+        if (id > 0) {
+            viewModel.retrieveItem(id).observe(viewLifecycleOwner) { selectedItem ->
+                item = selectedItem
+                bind(item)
+            }
+        } else {
+            binding.saveAction.setOnClickListener {
+                val success = addNewItem()
+                if (!success) {
+                    Log.d("aaa", "ERRO!!!")
+                    Toast.makeText(
+                        context,
+                        "All fields must be non-empty",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
     }
@@ -106,6 +115,31 @@ class AddItemFragment : Fragment() {
             return true
         } else {
             return false
+        }
+    }
+
+    private fun bind(item: Item) {
+        val price = "%.2f".format(item.price)
+        binding.apply {
+            itemName.setText(item.name, TextView.BufferType.SPANNABLE)
+            itemPrice.setText(price, TextView.BufferType.SPANNABLE)
+            itemCount.setText(item.quantity.toString(), TextView.BufferType.SPANNABLE)
+            saveAction.setOnClickListener{ updateItem() }
+        }
+    }
+
+    private fun updateItem() {
+        if (isEntryValid()) {
+            with(binding) {
+                viewModel.updateItem(
+                    this@AddItemFragment.navigationArgs.itemId,
+                    itemName.text.toString(),
+                    itemPrice.text.toString(),
+                    itemCount.text.toString()
+                )
+            }
+            val action = AddItemFragmentDirections.actionAddItemFragmentToItemListFragment()
+            findNavController().navigate(action)
         }
     }
 }
