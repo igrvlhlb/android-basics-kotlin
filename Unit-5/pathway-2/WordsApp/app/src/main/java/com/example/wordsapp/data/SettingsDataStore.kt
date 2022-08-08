@@ -33,7 +33,7 @@ class SettingsDataStore(context: Context) {
     }
 
     val preferenceFlow: Flow<Boolean> = context.dataStore.data
-        .catch{
+        .catch {
             if (it is IOException) {
                 it.printStackTrace()
                 emit(emptyPreferences())
@@ -45,5 +45,4 @@ class SettingsDataStore(context: Context) {
             // On the first run of the app, we will use LinearLayoutManager by default
             preferences[IS_LINEAR_LAYOUT_MANAGER] ?: true
         }
-    }
 }
