@@ -20,6 +20,7 @@ import com.example.forage.data.ForageableDao
 import com.example.forage.model.Forageable
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 /**
  * Shared [ViewModel] to provide data to the [ForageableListFragment], [ForageableDetailFragment],
@@ -33,13 +34,13 @@ class ForageableViewModel(
 
     // create a property to set to a list of all forageables from the DAO
     private val _forageables: LiveData<List<Forageable>> =
-        MutableLiveData(forageableDao.getForageables())
+        forageableDao.getForageables().asLiveData(Dispatchers.IO)
     val forageables: LiveData<List<Forageable>> get() = _forageables
 
     // create method that takes id: Long as a parameter and retrieve a Forageable from the
     //  database by id via the DAO.
     fun getForageable(id: Long): LiveData<Forageable> {
-        return MutableLiveData(forageableDao.getForageable(id))
+        return forageableDao.getForageable(id).asLiveData(Dispatchers.IO)
     }
 
     fun addForageable(
@@ -56,7 +57,7 @@ class ForageableViewModel(
         )
 
     // launch a coroutine and call the DAO method to add a Forageable to the database within it
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             forageableDao.insert(forageable)
         }
     }
