@@ -26,11 +26,11 @@ interface ForageableDao {
 
     // implement a method to retrieve all Forageables from the database
     @Query("SELECT * FROM forageable_database")
-    fun getForageables()
+    fun getForageables(): List<Forageable>
 
     // implement a method to retrieve a Forageable from the database by id
     @Query("SELECT * FROM forageable_database WHERE id=:id")
-    fun getForageable(id: Long)
+    fun getForageable(id: Long): Forageable
 
     // implement a method to insert a Forageable into the database
     //  (use OnConflictStrategy.REPLACE)
