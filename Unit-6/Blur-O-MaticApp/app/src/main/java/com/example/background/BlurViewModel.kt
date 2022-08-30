@@ -23,10 +23,7 @@ import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.work.Data
-import androidx.work.OneTimeWorkRequest
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
+import androidx.work.*
 import com.example.background.workers.BlurWorker
 import com.example.background.workers.CleanupWorker
 import com.example.background.workers.SaveImageToFileWorker
@@ -65,7 +62,13 @@ class BlurViewModel(application: Application) : ViewModel() {
         val workRequests = listOf(cleanup, *blurRequests, save)
         val continuation = workRequests
             .drop(1)
-            .fold(workManager.beginWith(workRequests.first())) {acc, next -> acc.then(next) }
+            .fold(
+                workManager.beginUniqueWork(
+                    IMAGE_MANIPULATION_WORK_NAME,
+                    ExistingWorkPolicy.REPLACE,
+                    workRequests.first()
+                )
+            ) { acc, next -> acc.then(next) }
         Log.d(TAG, "$continuation")
 
         continuation.enqueue()
