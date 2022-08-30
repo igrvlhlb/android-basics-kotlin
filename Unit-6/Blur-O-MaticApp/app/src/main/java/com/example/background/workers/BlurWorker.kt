@@ -20,6 +20,9 @@ class BlurWorker(val ctx: Context, params: WorkerParameters) : Worker(ctx, param
         Log.i(TAG, "ctx[$ctx] =? appContext[$appContext]")
         val resourceUri = inputData.getString(KEY_IMAGE_URI)
         makeStatusNotification("Image blurring in progress", appContext)
+
+        sleep()
+
         return try {
             if (TextUtils.isEmpty(resourceUri)) {
                 Log.e(TAG, "Invalid input uri")
