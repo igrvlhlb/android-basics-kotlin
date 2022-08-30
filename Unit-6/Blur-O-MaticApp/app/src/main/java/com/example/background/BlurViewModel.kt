@@ -20,6 +20,7 @@ import android.app.Application
 import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.work.Data
@@ -31,6 +32,7 @@ import com.example.background.workers.CleanupWorker
 import com.example.background.workers.SaveImageToFileWorker
 
 
+private const val TAG = "BlurViewModel"
 class BlurViewModel(application: Application) : ViewModel() {
 
     internal var imageUri: Uri? = null
@@ -48,15 +50,24 @@ class BlurViewModel(application: Application) : ViewModel() {
     internal fun applyBlur(blurLevel: Int) {
         val cleanup = OneTimeWorkRequest
             .from(CleanupWorker::class.java)
-        val blurRequest = OneTimeWorkRequestBuilder<BlurWorker>()
-            .setInputData(createInputDataForUri())
-            .build()
+
+        val blurRequests = (0 until blurLevel).map {
+            if (it == 0)
+                OneTimeWorkRequestBuilder<BlurWorker>()
+                .setInputData(createInputDataForUri())
+                .build()
+            else
+                OneTimeWorkRequestBuilder<BlurWorker>().build()
+        }.toTypedArray()
+        Log.d(TAG, "$blurRequests")
         val save = OneTimeWorkRequestBuilder<SaveImageToFileWorker>().build()
 
-        val continuation = workManager
-            .beginWith(cleanup)
-            .then(blurRequest)
-            .then(save)
+        val workRequests = listOf(cleanup, *blurRequests, save)
+        val continuation = workRequests
+            .drop(1)
+            .fold(workManager.beginWith(workRequests.first())) {acc, next -> acc.then(next) }
+        Log.d(TAG, "$continuation")
+
         continuation.enqueue()
     }
 
