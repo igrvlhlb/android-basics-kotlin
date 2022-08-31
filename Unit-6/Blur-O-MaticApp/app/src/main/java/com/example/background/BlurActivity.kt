@@ -37,6 +37,15 @@ class BlurActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.goButton.setOnClickListener { viewModel.applyBlur(blurLevel) }
+
+        viewModel.outputWorkInfos.observe(this) { infos ->
+            val info = infos?.firstOrNull() ?: return@observe
+            if (info.state.isFinished) {
+                showWorkFinished()
+            } else {
+                showWorkInProgress()
+            }
+        }
     }
 
     /**
