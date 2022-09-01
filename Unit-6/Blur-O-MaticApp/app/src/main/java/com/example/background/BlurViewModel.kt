@@ -60,7 +60,7 @@ class BlurViewModel(application: Application) : ViewModel() {
             else
                 OneTimeWorkRequestBuilder<BlurWorker>().build()
         }.toTypedArray()
-        Log.d(TAG, "$blurRequests")
+
         val save = OneTimeWorkRequestBuilder<SaveImageToFileWorker>()
             .addTag(TAG_OUTPUT)
             .build()
@@ -75,7 +75,6 @@ class BlurViewModel(application: Application) : ViewModel() {
                     workRequests.first()
                 )
             ) { acc, next -> acc.then(next) }
-        Log.d(TAG, "$continuation")
 
         continuation.enqueue()
     }
