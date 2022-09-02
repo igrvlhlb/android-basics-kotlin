@@ -61,7 +61,14 @@ class BlurViewModel(application: Application) : ViewModel() {
                 OneTimeWorkRequestBuilder<BlurWorker>().build()
         }.toTypedArray()
 
+        val constraint = Constraints.Builder()
+            .setRequiresCharging(true)
+            .setRequiresBatteryNotLow(true)
+            .setRequiresStorageNotLow(true)
+            .build()
+
         val save = OneTimeWorkRequestBuilder<SaveImageToFileWorker>()
+            .setConstraints(constraint)
             .addTag(TAG_OUTPUT)
             .build()
 
@@ -110,6 +117,10 @@ class BlurViewModel(application: Application) : ViewModel() {
 
     internal fun setOutputUri(outputImageUri: String?) {
         outputUri = uriOrNull(outputImageUri)
+    }
+
+    internal fun cancelWork() {
+        workManager.cancelUniqueWork(IMAGE_MANIPULATION_WORK_NAME)
     }
 
     class BlurViewModelFactory(private val application: Application) : ViewModelProvider.Factory {
